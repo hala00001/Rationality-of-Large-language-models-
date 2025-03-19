@@ -1,0 +1,44 @@
+import pandas as pd
+from scipy.stats import pearsonr
+
+# Define the dataset for Narrow and Broad abilities for each model
+data = {
+    "Model": ["ChatGPT-4", "ChatGPT-4", "Gemini", "Gemini", "ChatGPT-3.5", "ChatGPT-3.5",
+              "Claude", "Claude", "Llama 3.2", "Llama 3.2", "Mistral", "Mistral"],
+    "Ability Type": ["Broad", "Narrow", "Broad", "Narrow", "Broad", "Narrow",
+                     "Broad", "Narrow", "Broad", "Narrow", "Broad", "Narrow"],
+    "Score": [64.57, 61.29, 41.71, 34.43, 36.86, 38.71, 59.57, 67.29, 55.58, 38.43, 36.51, 31.84]
+}
+
+# Create a DataFrame
+df = pd.DataFrame(data)
+
+# Group data by model and calculate correlation for each model
+results = []
+models = df["Model"].unique()
+
+for model in models:
+    # Filter data for the current model
+    model_data = df[df["Model"] == model]
+    broad_scores = model_data[model_data["Ability Type"] == "Broad"]["Score"]
+    narrow_scores = model_data[model_data["Ability Type"] == "Narrow"]["Score"]
+    
+    # Check if there are enough data points to calculate correlation
+    if len(broad_scores) > 1 and len(narrow_scores) > 1:
+        correlation, p_value = pearsonr(broad_scores, narrow_scores)
+    else:
+        correlation, p_value = None, None  # Not enough data points
+    
+    # Store results
+    results.append({
+        "Model": model,
+        "Pearson Correlation": correlation,
+        "P-Value": p_value,
+        "Relationship": "No significant relationship" if p_value is None or p_value > 0.05 else "Significant relationship"
+    })
+
+# Convert results to a DataFrame
+correlation_results = pd.DataFrame(results)
+
+# Display the results
+import ace_tools as tools; tools.display_dataframe_to_user(name="Correlation Between Broad and Narrow Abilities by Model", dataframe=correlation_results)
