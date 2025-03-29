@@ -40,7 +40,7 @@ Example:
     'D': "Option D",
     'correct': "A"
 }
-Requirements
+### Requirements
 Install necessary dependencies:
 
 bash
@@ -69,7 +69,7 @@ Send them to the specified LLM
 
 Store the answers for later analysis
 
-🤖 Models Tested
+### 🤖 Models Tested
 GPT-4 (OpenAI)
 
 GPT-3.5 (OpenAI)
@@ -82,7 +82,7 @@ LLaMA 3 (Meta)
 
 Mistral
 
-📊 Evaluation Focus
+### 📊 Evaluation Focus
 Legal Reasoning: Bar-style legal logic and knowledge
 
 Rationality: Cognitive logic and reasoning, including:
