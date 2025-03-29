@@ -17,6 +17,19 @@ This repository contains the Python code and structured datasets used to evaluat
 - Model responses are collected and stored for analysis.
 
 ---
+📁 Included Files
+Rationilty formatted .pdf: Contains rationality tasks such as Wason Selection Task, Conjunction Fallacy, CRT.
+
+___# Law Data___.pdf: Contains legal reasoning questions drawn from Bar-style exams.
+
+bartest core(law) .pdf: Additional core legal test items.
+
+checking_gptaccuracy (2).py: Script to test LLMs on the above datasets.
+
+
+corrlation: Folder or file likely related to statistical correlation analysis (e.g., performance across domains).
+
+README.md: This documentation.
 
 ## 🔧 Setup Instructions
 
