@@ -42,6 +42,8 @@ Example:
     'D': "Option D",
     'correct': "A"
 }
+
+---
 ### Requirements
 Install necessary dependencies:
 
@@ -70,6 +72,7 @@ Load the formatted questions
 Send them to the specified LLM
 
 Store the answers for later analysis
+---
 
 ### 🤖 Models Tested
 GPT-4 (OpenAI)
