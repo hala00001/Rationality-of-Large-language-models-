@@ -17,7 +17,8 @@ This repository contains the Python code and structured datasets used to evaluat
 - Model responses are collected and stored for analysis.
 
 ---
-📁 Included Files
+## 📁 Included Files
+
 Rationilty formatted .pdf: Contains rationality tasks such as Wason Selection Task, Conjunction Fallacy, CRT.
 
 ___# Law Data___.pdf: Contains legal reasoning questions drawn from Bar-style exams.
