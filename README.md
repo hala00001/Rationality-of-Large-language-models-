@@ -40,4 +40,57 @@ Example:
     'D': "Option D",
     'correct': "A"
 }
+Requirements
+Install necessary dependencies:
 
+bash
+Copy
+Edit
+pip install openai anthropic transformers requests
+Set your API keys in a .env file or use environment variables:
+
+bash
+Copy
+Edit
+export OPENAI_API_KEY="your_openai_api_key"
+export ANTHROPIC_API_KEY="your_anthropic_api_key"
+▶️ Running the Script
+To run the evaluation:
+
+bash
+Copy
+Edit
+python checking_gptaccuracy\ \(2\).py
+This script will:
+
+Load the formatted questions
+
+Send them to the specified LLM
+
+Store the answers for later analysis
+
+🤖 Models Tested
+GPT-4 (OpenAI)
+
+GPT-3.5 (OpenAI)
+
+Claude 2 (Anthropic)
+
+Gemini (Google DeepMind)
+
+LLaMA 3 (Meta)
+
+Mistral
+
+📊 Evaluation Focus
+Legal Reasoning: Bar-style legal logic and knowledge
+
+Rationality: Cognitive logic and reasoning, including:
+
+Wason Selection Task
+
+Conjunction Fallacy
+
+Base Rate Neglect
+
+Cognitive Reflection Test (CRT)
