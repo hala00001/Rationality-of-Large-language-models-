@@ -111,3 +111,80 @@ Edit
     "correct": "A"
 }
 Questions are available in .pdf format under the dataset directory and are designed for compatibility with any LLM testing pipeline.
+
+#############################
+# TriDoBench LLM Accuracy Evaluators (Law · Medical · LeetCode)
+
+A lightweight, reproducible toolkit to **evaluate large language models (LLMs)** on three tracks:
+
+- **Law** — multiple-choice/short-answer questions (add your dataset file; same schema as Medical).
+- **Medical** — echo/ultrasound and cardiology-focused MCQs (already included).
+- **LeetCode** — browser-driven solving of Hard problems with Selenium and pass/fail scoring.
+
+This repo is part of Dana Alsagheer’s dissertation work on **consistency, reliability, and cross-domain generalization** of LLMs (TriDoBench). It provides clean scripts and data structures you can run locally or on Colab to get **per-model accuracy** and raw run logs.
+
+
+## Repository Layout
+
+.
+├─ medical_checking_llmaccuracy.py # Medical MCQ evaluator (dict-based questions)
+├─ leetcode_checking_llmaccuracy.py # LeetCode auto-solver + scorer (Selenium)
+├─ problems.txt # List of LeetCode problem URLs (one per line)
+├─ law_checking_llmaccuracy.py # (Optional) Law evaluator – add your file here
+├─ data/
+│ ├─ law/ # (Optional) Your law MCQ JSON/CSV lives here
+│ └─ medical/ # (Optional) extra medical question banks
+└─ README.md
+
+pgsql
+Copy
+Edit
+
+
+## What’s Inside
+
+### Medical evaluator
+- Each chapter `chpN` is a **list of dicts** with keys `number`, `question`, options (`A`–`D`), and `correct` (gold label).
+- The script can loop questions, query one or more models, and print run-by-run correctness + summary accuracy.
+- Model endpoints already scaffolded: **Llama (llmapi)**, **Gemini**, **Mistral**, **Claude**, **OpenAI**.
+
+**Example item (schema):**
+```python
+{
+  "number": 1,
+  "question": "The speed of sound in tissues is:",
+  "A": "Roughly 1540 m/s",
+  "B": "Roughly 1540 km/s",
+  "C": "Roughly 1540 cm/s",
+  "D": "Roughly 1540 m/min",
+  "correct": "A"
+}
+Example output (truncated):
+
+yaml
+Copy
+Edit
+=== chp5 ===
+Q82: Pulse duration is affected by:…
+  Claude  -> A  [correct]
+...
+Mistral  : 254/496 correct  (51.21%)
+DeepSeek : 297/496 correct  (59.88%)
+Gemini   : 233/496 correct  (46.98%)
+Llama-3.2: 155/496 correct  (31.25%)
+LeetCode evaluator
+Uses Selenium + Chrome to navigate each URL from problems.txt, scrape description + starter code, call a selected model adapter, paste the answer into the editor, run tests, and record Accepted vs Wrong Answer.
+
+Toggle models via boolean flags (OpenAI, DeepSeek, Claude, Mistral, Gemini, Llama) and pass your API keys through environment variables.
+
+Prints a final score table like: openai : 78/100 passed (78.0%).
+
+Example problems.txt:
+
+ruby
+Copy
+Edit
+https://leetcode.com/problems/median-of-two-sorted-arrays/
+https://leetcode.com/problems/regular-expression-matching/
+...
+
